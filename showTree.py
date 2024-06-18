@@ -148,7 +148,7 @@ class DomTreeMaker(object):
         sequence as values.
         '''
         self.msa_fasta_dict = {}
-        with open(self.msa_path, 'rU') as fa:
+        with open(self.msa_path, 'r') as fa:
             for record in SeqIO.parse(fa, 'fasta'):
                 header = str(record.id)
                 seq = str(record.seq)
@@ -180,7 +180,7 @@ class DomTreeMaker(object):
             for line in df:
                 if line.startswith('#') or not line.strip():
                     continue
-                fields = line.split()
+                fields = line.split('\t')
                 gene_id = fields[0].replace(':', '_')
                 if gene_id in self.domain_dict and gene_id not in this_annot:
                     print('\033[31m Warning! The ID {} is listed in '
@@ -189,10 +189,10 @@ class DomTreeMaker(object):
 
                 if not gene_set or gene_id in gene_set:  # if no MSA or tree were specified, all pfam_scan entries will be plotted
                     ungapped_start, ungapped_stop = \
-                        int(fields[1]), int(fields[2])
+                        int(fields[6]), int(fields[7])
                     ungapped_start -= 1  # adjusting borders to Pythons 0-indexing
                     ungapped_stop -= 1   # (Pfam domains are 1-indexed)
-                    domname = str(fields[6])
+                    domname = str(fields[12])
                     self.domains.add(domname)
                     if self.msa_fasta_dict:
                         gapped_seq = self.msa_fasta_dict[gene_id]
