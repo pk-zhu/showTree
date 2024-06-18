@@ -31,8 +31,10 @@ showTree requires Python2.7 or Python3.4 or higher and the following Python pack
 
 It is absolutely crucial that you're using ete3 version 3.0.0b35 and not the latest version. The latest version simply won't work because some
 classes that showTree depends on were silently removed from ete3.
-The protein domain annotation must be in the output format of pfam_scan.pl which you can download here: ftp://ftp.ebi.ac.uk/pub/databases/Pfam/Tools/ .
-
+The protein domain annotation must be in the output format of [Interproscan](https://interproscan-docs.readthedocs.io/en/latest/index.html).
+```
+interproscan.sh -appl Pfam -cpu 10 -i input.fa -o ouput.pfam -f tsv
+```
 <details>
   <summary>note for bornberglab-members who use calcTree (click to expand)</summary>
 The input files (MSA and gene tree) may also be computed with calcTree (https://ebbgit.uni-muenster.de/ckeme_01/geneSearch/wikis/calcTree).
